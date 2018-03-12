@@ -13,22 +13,22 @@
 </head>
     <body>
 
-      <form>
+      <form action="#" th:action="@{/register}" th:object="${registrationForm}" method="post">
       
         <h1>Sign Up</h1>
         
         <fieldset id="basic_info">
           <legend><span class="number">1</span>Your basic info</legend>
           <label for="name">Name:</label>
-          <input type="text" id="name" name="user_name">
+          <input type="text" id="name" name="user_name" th:field="*{name}" />
           <p class="input_helper" id="name_input_helper">please provid a valid user name</p>
 		  
           <label for="mail">Email:</label>
-          <input type="email" id="mail" name="user_email">
+          <input type="email" id="mail" name="user_email" th:field="*{email}" />
 		  <p class="input_helper" id="mail_input_helper">please provid a valid mail</p>
           
           <label for="password">Password:</label>
-          <input type="password" id="password" name="user_password">
+          <input type="password" id="password" name="user_password" th:field="*{password}" />
 		  <p class="input_helper" id="pwd_input_helper">please provid a valid password</p>
           
             
@@ -39,11 +39,11 @@
 			<fieldset>
 			  <legend><span class="number">2</span>Your profile</legend>
 			  <label for="bio">Biography:</label>
-			  <textarea id="bio" name="user_bio"></textarea>
+			  <textarea id="bio" name="user_bio" th:field="*{description}" /></textarea>
 			</fieldset>
 			<fieldset>
 			<label for="job">Job Role:</label>
-			<select id="job" name="user_job">
+			<select id="job" name="user_job" th:field="*{job}" >
 			  <optgroup label="Web">
 				<option value="frontend_developer">Front-End Developer</option>
 				<option value="php_developor">PHP Developer</option>
@@ -67,7 +67,14 @@
 			  </optgroup>
 			</select>
 			
+			
+			
 			  <label>Interests:</label>
+				<div th:each="search : ${intrests}">
+		            <input type="checkbox" th:field="*{intrests}" th:value="${search}"/>
+		            <label th:text="${search}"></label>
+		        </div>
+				
 			  <input type="checkbox" id="development" value="interest_development" name="user_interest">
 			  <label class="light" for="development">Development</label><br>
 			  <input type="checkbox" id="design" value="interest_design" name="user_interest">
@@ -79,7 +86,7 @@
 			<button type="submit">Sign Up</button>		
 		</div>
 		
-		<button id="go_to_sign_in">Already have an Account, Sign In</button>
+		<a id="go_to_sign_in">Already have an Account, Sign In</a>
 		
       </form>
 	  

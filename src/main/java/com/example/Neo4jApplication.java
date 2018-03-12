@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,8 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
-import com.example.domain.Person;
-import com.example.domain.PersonRepository;
 import com.example.domain.TrustRelationship;
 import com.example.domain.User;
 import com.example.domain.UserRepository;

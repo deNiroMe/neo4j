@@ -18,6 +18,14 @@ public class User {
 	private String password;
 	
 	private String Role;
+	
+	private String email;
+	
+	private String description;
+	
+	private String[] intrests;
+	
+	private String job;
 
 	@SuppressWarnings("unused")
 	private User() {
@@ -73,5 +81,37 @@ public class User {
 	public void setRole(String role) {
 		Role = role;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String[] getIntrests() {
+		return intrests;
+	}
+
+	public void setIntrests(String[] intrests) {
+		this.intrests = intrests;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
 }
