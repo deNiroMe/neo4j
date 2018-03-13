@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 import com.example.domain.TrustRelationship;
 import com.example.domain.User;
-import com.example.domain.UserRepository;
+import com.example.repository.UserRepository;
 
 @SpringBootApplication
 @EnableNeo4jRepositories
@@ -31,12 +31,18 @@ public class Neo4jApplication {
 	public static NoOpPasswordEncoder passwordEncoder() {
 	return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
 	}
+	
 	@Bean
 	CommandLineRunner demo(UserRepository personRepository) {
 		return args -> {
 
 			personRepository.deleteAll();
 
+			User ahmed = new User("ahmed", "pass", "USER", "ahmed@gmail.com", "ahmed says hello world !!", new String[] {"reading", "soccer"}, "programmer");
+			User abdelkabir = new User("abdelkabir", "pass", "USER", "abdelkabir@gmail.com", "abdelkabir says hello world !!", new String[] {"movies", "swimming"}, "programmer");
+			User micheal = new User("micheal", "pass", "USER", "micheal@gmail.com", "micheal says hello world !!", new String[] {"reading", "travel"}, "taxi driver");
+			User hind = new User("hind", "pass", "USER", "hind@gmail.com", "hind says hello world !!", new String[] { "swimming"}, "photographer");
+			
 			User greg = new User("Greg");
 			greg.setPassword("pass");
 			greg.setRole("User");
@@ -47,34 +53,32 @@ public class Neo4jApplication {
 			craig.setPassword("pass");
 			craig.setRole("User");
 			
-			List<User> team = Arrays.asList(greg, roy, craig);
+			List<User> team = Arrays.asList(ahmed,hind,abdelkabir,micheal);
 
-			log.info("Before linking up with Neo4j...");
+			personRepository.save(ahmed);
+			personRepository.save(abdelkabir);
+			personRepository.save(micheal);
+			personRepository.save(hind);
 
-			team.stream().forEach(person -> log.info("\t" + person.toString()));
-
-			personRepository.save(greg);
-			personRepository.save(roy);
-			personRepository.save(craig);
-
-			greg = personRepository.findByName(greg.getName());
-			craig = personRepository.findByName(craig.getName());
+			abdelkabir = personRepository.findByName(abdelkabir.getName());
+			micheal = personRepository.findByName(micheal.getName());
+			ahmed = personRepository.findByName(ahmed.getName());
+			hind = personRepository.findByName(hind.getName());
 			
-			TrustRelationship trustee = new TrustRelationship(5,greg,craig);
-			greg.addTrustee(trustee);
-			personRepository.save(greg);
-
+			TrustRelationship trustee = new TrustRelationship(5,abdelkabir,micheal);
+			abdelkabir.addTrustee(trustee);
+			personRepository.save(abdelkabir);
 			
-			TrustRelationship trustee2 = new TrustRelationship(5,craig,greg);
-			craig.addTrustee(trustee2);
-			personRepository.save(craig);
+			TrustRelationship trustee2 = new TrustRelationship(7,micheal,abdelkabir);
+			micheal.addTrustee(trustee2);
+			personRepository.save(micheal);
 			
-//			roy = personRepository.findByName(roy.getName());
-//			roy.worksWith(craig);
-//			// We already know that roy works with greg
-//			personRepository.save(roy);
-//
-//			// We already know craig works with roy and greg
+			TrustRelationship trustee3 = new TrustRelationship(5,hind,micheal);
+			TrustRelationship trustee4 = new TrustRelationship(5,hind,ahmed);
+			hind.addTrustee(trustee4);
+			hind.addTrustee(trustee3);
+			personRepository.save(hind);
+			
 
 			log.info("Lookup each person by name...");
 			team.stream().forEach(person -> log.info(

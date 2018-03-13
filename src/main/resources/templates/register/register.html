@@ -1,95 +1,115 @@
 <!DOCTYPE html>
-<html lang="en"
-	xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sign Up Form</title>
-        <link rel="stylesheet" href="css/normalize.css">
-        <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" th:href="@{/css/login.css}" href="css/login.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up Form</title>
+<link rel="stylesheet" href="css/normalize.css">
+<link href='https://fonts.googleapis.com/css?family=Nunito:400,300'
+	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" th:href="@{/css/login.css}" href="css/login.css">
+<link rel="stylesheet"  th:href="@{/css/bootstrap.min.css}" type='text/css'>
 </head>
-    <body>
+<body>
 
-      <form action="#" th:action="@{/register}" th:object="${registrationForm}" method="post">
-      
-        <h1>Sign Up</h1>
-        
-        <fieldset id="basic_info">
-          <legend><span class="number">1</span>Your basic info</legend>
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="user_name" th:field="*{name}" />
-          <p class="input_helper" id="name_input_helper">please provid a valid user name</p>
-		  
-          <label for="mail">Email:</label>
-          <input type="email" id="mail" name="user_email" th:field="*{email}" />
-		  <p class="input_helper" id="mail_input_helper">please provid a valid mail</p>
-          
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="user_password" th:field="*{password}" />
-		  <p class="input_helper" id="pwd_input_helper">please provid a valid password</p>
-          
-            
-		  <button type="submit" id="step_1">Next step</button>
-        </fieldset>
-        
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Project name</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/login">Sign In</a></li>
+					<li><a href="/register">Sign Up</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<form action="#" th:action="@{/register}"
+		th:object="${registrationForm}" method="post">
+
+		<h1>Sign Up</h1>
+
+		<fieldset id="basic_info">
+			<legend>
+				<span class="number">1</span>Your basic info
+			</legend>
+			<label for="name">Name:</label> <input type="text" id="name"
+				name="user_name" th:field="*{name}" />
+			<p class="input_helper" id="name_input_helper">please provid a
+				valid user name</p>
+
+			<label for="mail">Email:</label> <input type="email" id="mail"
+				name="user_email" th:field="*{email}" />
+			<p class="input_helper" id="mail_input_helper">please provid a
+				valid mail</p>
+
+			<label for="password">Password:</label> <input type="password"
+				id="password" name="user_password" th:field="*{password}" />
+			<p class="input_helper" id="pwd_input_helper">please provid a
+				valid password</p>
+
+
+			<button type="submit" id="step_1">Next step</button>
+		</fieldset>
+
 		<div id="other_info">
 			<fieldset>
-			  <legend><span class="number">2</span>Your profile</legend>
-			  <label for="bio">Biography:</label>
-			  <textarea id="bio" name="user_bio" th:field="*{description}" /></textarea>
+				<legend>
+					<span class="number">2</span>Your profile
+				</legend>
+				<label for="bio">Biography:</label>
+				<textarea id="bio" name="user_bio" th:field="*{description}" /></textarea>
 			</fieldset>
 			<fieldset>
-			<label for="job">Job Role:</label>
-			<select id="job" name="user_job" th:field="*{job}" >
-			  <optgroup label="Web">
-				<option value="frontend_developer">Front-End Developer</option>
-				<option value="php_developor">PHP Developer</option>
-				<option value="python_developer">Python Developer</option>
-				<option value="rails_developer"> Rails Developer</option>
-				<option value="web_designer">Web Designer</option>
-				<option value="WordPress_developer">WordPress Developer</option>
-			  </optgroup>
-			  <optgroup label="Mobile">
-				<option value="Android_developer">Androild Developer</option>
-				<option value="iOS_developer">iOS Developer</option>
-				<option value="mobile_designer">Mobile Designer</option>
-			  </optgroup>
-			  <optgroup label="Business">
-				<option value="business_owner">Business Owner</option>
-				<option value="freelancer">Freelancer</option>
-			  </optgroup>
-			  <optgroup label="Other">
-				<option value="secretary">Secretary</option>
-				<option value="maintenance">Maintenance</option>
-			  </optgroup>
-			</select>
-			
-			
-			
-			  <label>Interests:</label>
+				<label for="job">Job Role:</label> <select id="job" name="user_job"
+					th:field="*{job}">
+					<optgroup label="Web">
+						<option value="frontend_developer">Front-End Developer</option>
+						<option value="php_developor">PHP Developer</option>
+						<option value="python_developer">Python Developer</option>
+						<option value="rails_developer">Rails Developer</option>
+						<option value="web_designer">Web Designer</option>
+						<option value="WordPress_developer">WordPress Developer</option>
+					</optgroup>
+					<optgroup label="Mobile">
+						<option value="Android_developer">Androild Developer</option>
+						<option value="iOS_developer">iOS Developer</option>
+						<option value="mobile_designer">Mobile Designer</option>
+					</optgroup>
+					<optgroup label="Business">
+						<option value="business_owner">Business Owner</option>
+						<option value="freelancer">Freelancer</option>
+					</optgroup>
+					<optgroup label="Other">
+						<option value="secretary">Secretary</option>
+						<option value="maintenance">Maintenance</option>
+					</optgroup>
+				</select> <label>Interests:</label>
 				<div th:each="search : ${intrests}">
-		            <input type="checkbox" th:field="*{intrests}" th:value="${search}"/>
-		            <label th:text="${search}"></label>
-		        </div>
-				
-			  <input type="checkbox" id="development" value="interest_development" name="user_interest">
-			  <label class="light" for="development">Development</label><br>
-			  <input type="checkbox" id="design" value="interest_design" name="user_interest">
-			  <label class="light" for="design">Design</label><br>
-			  <input type="checkbox" id="business" value="interest_business" name="user_interest">
-			  <label class="light" for="business">Business</label>
-			
+					<input type="checkbox" th:field="*{intrests}" th:value="${search}" />
+					<label th:text="${search}"></label>
+				</div>
+
+				<input type="checkbox" id="development" value="interest_development"
+					name="user_interest"> <label class="light"
+					for="development">Development</label><br> <input
+					type="checkbox" id="design" value="interest_design"
+					name="user_interest"> <label class="light" for="design">Design</label><br>
+				<input type="checkbox" id="business" value="interest_business"
+					name="user_interest"> <label class="light" for="business">Business</label>
+
 			</fieldset>
-			<button type="submit">Sign Up</button>		
+			<button type="submit">Sign Up</button>
 		</div>
-		
-		<a id="go_to_sign_in">Already have an Account, Sign In</a>
-		
-      </form>
-	  
+
+	</form>
+
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
 </body>

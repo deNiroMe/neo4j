@@ -46,6 +46,28 @@ public class User {
 		this.name = name;
 	}
 	
+	
+	/**
+	 * @param name
+	 * @param password
+	 * @param role
+	 * @param email
+	 * @param description
+	 * @param intrests
+	 * @param job
+	 */
+	public User(String name, String password, String role, String email, String description, String[] intrests,
+			String job) {
+		super();
+		this.name = name;
+		this.password = password;
+		Role = role;
+		this.email = email;
+		this.description = description;
+		this.intrests = intrests;
+		this.job = job;
+	}
+
 	public String getName() {
 		return name;
 	}

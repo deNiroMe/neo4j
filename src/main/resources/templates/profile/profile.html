@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html>
-<title>W3.CSS Template</title>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>profile</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -12,6 +16,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 .m9 > .m2{
 	margin  : 7px;
 }
+h3.title{
+    font-size: xx-large;
+    font-stretch: normal;
+    margin: 50px;
+    color: #000;
+}
+
 .cart_quantity_up, .cart_quantity_down{
 background: #F0F0E9;
     color: #696763;
@@ -67,12 +78,15 @@ background: #F0F0E9;
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
-         <h4 class="w3-center">My Profile</h4>
+         <h4 class="w3-center" th:text="${user.name}">My Profile</h4>
          <p class="w3-center"><img id="profile_pic" src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+         <p><i class="fa fa-address-card fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.email}">Designer, UI</span></p>
+         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.intrests}">Designer, UI</span></p>
+         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
+         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
         </div>
       </div>
       <br>
@@ -84,6 +98,7 @@ background: #F0F0E9;
     <!-- Middle Column -->
 	<div class="w3-col m9">
 	
+		<h3 class="title">No friends suggestions for now <a href="#"> go to friends list</a></h3>	
 	
 	</div>
 	
@@ -104,61 +119,128 @@ background: #F0F0E9;
 
 (function () {
 
+	var suggestions = [];
+	
 	function getRandomInt() {
 		let min = 1, max = 6;
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 	
-	$("#profile_pic").attr("src","img/avatar" + getRandomInt() + ".png")
+	$("h3.title").hide();
+	
+	$.get( "/suggestions", function( data ) {
+		suggestions = data;
+		let html = '';
+		
+		if( suggestions.length == 0){
+			$("h3.title").show();
+		}
+		else {
+			$.each( suggestions, function( i, value ){		
+				avatar = getRandomInt();
+				 html += ` 
+				   <div class="w3-col m2" id="friend_request_${i}">
+				   <div class="w3-card w3-round w3-white w3-center ">
+			        <div class="w3-container">
+			          <p>Friend Request</p>
+			          <img src="img/avatar${avatar}.png" alt="Avatar" style="width:50%"><br>
+			          <span>${value.name}</span>
+			          <div class="w3-row w3-opacity">
+			            <div class="check_remove" id="check_remove_${i}">
+							<div class="w3-half" id="check_${i}">
+							  <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
+							</div>
+							<div class="w3-half" id="remove_${i}">
+							  <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
+							</div>
+						</div>
+						<div class="cart_quantity_button" id="cart_quantity_button_${i}">
+							 <p class="p_helper">define trust weigh</p>	
+							 <a class="cart_quantity_up"> + </a>
+							 <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+							 <a class="cart_quantity_down"> - </a>
+							 <div class="w3-half" id="validate_${i}">
+							  	<button class="w3-button w3-block w3-blue w3-section" style="margin:23px;" title="Decline"><i class="fa fa-plus"></i></button>
+							 </div>
+						</div>
+			          </div>
+			        </div>
+			      </div>
+				  </div>
+				`;			
+				//console.log(value);
+			});
+			$(".m9").append(html);
+			$(".cart_quantity_button").hide();
+			$(".check_remove").show();
+			
+			$.each( suggestions, function( i, value ){
+				$("#remove_"+i).on("click", function(e){			
+					e.preventDefault();	
+					console.log("clicked" +i);
+					$("#friend_request_"+i).hide();
+				});
+				$("#check_"+i).on("click", function(e){			
+					e.preventDefault();	
+					$("#check_remove_"+i).hide();
+					$("#cart_quantity_button_"+i).show();
+				});
+			});	
+		}
+		
+	});
+	
+	
+	$("#profile_pic").attr("src","img/avatar" + getRandomInt() + ".png");
 
-	let html = '';
-	for (var i = 1; i < 7; i++) {
-	 html += ` 
-	   <div class="w3-col m2" id="friend_request_${i}">
-	   <div class="w3-card w3-round w3-white w3-center ">
-        <div class="w3-container">
-          <p>Friend Request</p>
-          <img src="img/avatar${i}.png" alt="Avatar" style="width:50%"><br>
-          <span>Jane Doe</span>
-          <div class="w3-row w3-opacity">
-            <div class="check_remove" id="check_remove_${i}">
-				<div class="w3-half" id="check_${i}">
-				  <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
-				</div>
-				<div class="w3-half" id="remove_${i}">
-				  <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
-				</div>
-			</div>
-			<div class="cart_quantity_button" id="cart_quantity_button_${i}">
-				 <p class="p_helper">define trust weigh</p>	
-				 <a class="cart_quantity_up"> + </a>
-				 <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-				 <a class="cart_quantity_down"> - </a>
-			</div>
-          </div>
-        </div>
-      </div>
-	  </div>
-	`;
-	}
+// 	let html = '';
+// 	for (var i = 1; i < 7; i++) {
+// 	 html += ` 
+// 	   <div class="w3-col m2" id="friend_request_${i}">
+// 	   <div class="w3-card w3-round w3-white w3-center ">
+//         <div class="w3-container">
+//           <p>Friend Request</p>
+//           <img src="img/avatar${i}.png" alt="Avatar" style="width:50%"><br>
+//           <span>Jane Doe</span>
+//           <div class="w3-row w3-opacity">
+//             <div class="check_remove" id="check_remove_${i}">
+// 				<div class="w3-half" id="check_${i}">
+// 				  <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
+// 				</div>
+// 				<div class="w3-half" id="remove_${i}">
+// 				  <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
+// 				</div>
+// 			</div>
+// 			<div class="cart_quantity_button" id="cart_quantity_button_${i}">
+// 				 <p class="p_helper">define trust weigh</p>	
+// 				 <a class="cart_quantity_up"> + </a>
+// 				 <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+// 				 <a class="cart_quantity_down"> - </a>
+// 			</div>
+//           </div>
+//         </div>
+//       </div>
+// 	  </div>
+// 	`;
+// 	}
 	
-	$(".m9").append(html);	
+// 	$(".m9").append(html);	
     
-	$(".cart_quantity_button").hide();
-	$(".check_remove").show();
+// 	$(".cart_quantity_button").hide();
+// 	$(".check_remove").show();
 	
-	for (let i = 1; i < 7; i++) {
-		$("#remove_"+i).on("click", function(e){			
-			e.preventDefault();	
-			console.log("clicked" +i);
-			$("#friend_request_"+i).hide();
-		});
-		$("#check_"+i).on("click", function(e){			
-			e.preventDefault();	
-			$("#check_remove_"+i).hide();
-			$("#cart_quantity_button_"+i).show();
-		});
-	}
+// 	for (let i = 1; i < 7; i++) {
+// 		$("#remove_"+i).on("click", function(e){			
+// 			e.preventDefault();	
+// 			console.log("clicked" +i);
+// 			$("#friend_request_"+i).hide();
+// 		});
+// 		$("#check_"+i).on("click", function(e){			
+// 			e.preventDefault();	
+// 			$("#check_remove_"+i).hide();
+// 			$("#cart_quantity_button_"+i).show();
+// 		});
+// 	}
 })();
 </script>
 

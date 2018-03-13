@@ -1,4 +1,4 @@
-package com.example;
+package com.example.controller;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.domain.TrustRelationship;
 import com.example.domain.User;
-import com.example.domain.UserRepository;
 import com.example.forms.RegistrationForm;
+import com.example.repository.UserRepository;
 
 @Controller
 public class RegisterController {
