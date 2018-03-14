@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/js/**").permitAll()
 			.antMatchers("/img/**").permitAll()
 			.antMatchers("/register").permitAll()
+			.antMatchers("/ajax/**").permitAll()
 			.antMatchers("/user/**").hasRole("USER")
 				.anyRequest().authenticated()
 				.and()
@@ -41,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 				.logoutSuccessUrl("/login?logout")
 				.permitAll();
+		http.csrf().disable();
 	}
 	
 @Override

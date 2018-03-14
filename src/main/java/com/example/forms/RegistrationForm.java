@@ -69,7 +69,7 @@ public class RegistrationForm {
 	public User createUser(){		
 		User user = new User(this.name);
 		user.setPassword(this.password);
-		user.setRole("User");
+		user.setRole("USER");
 		user.setDescription(this.description);
 		user.setJob(this.job);
 		user.setEmail(this.email);

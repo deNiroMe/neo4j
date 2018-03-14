@@ -12,6 +12,20 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;
+}
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 .m9 > .m2{
 	margin  : 7px;
@@ -98,9 +112,7 @@ background: #F0F0E9;
     
     <!-- Middle Column -->
 	<div class="w3-col m9">
-	
-		<h3 class="title">No friends suggestions for now <a href="#"> go to friends list</a></h3>	
-	
+
 	</div>
 	
     <!-- End Grid -->
@@ -127,10 +139,9 @@ background: #F0F0E9;
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 	
-	$("h3.title").hide();
-	
-	$.get( "/suggestions", function( data ) {
+	$.get( "/friends", function( data ) {
 		suggestions = data;
+		alert(data);
 		let html = '';
 		
 		if( suggestions.length == 0){
@@ -141,42 +152,16 @@ background: #F0F0E9;
 				avatar = getRandomInt();
 				 html += ` 
 				   <div class="w3-col m2" id="friend_request_${i}">
+				   
 				   <div class="w3-card w3-round w3-white w3-center ">
+				   <span class="badge">5</span>
 			        <div class="w3-container">
-			          <p>Friend Request</p>
+			          <p>${value.name}</p>
 			          <img src="img/avatar${avatar}.png" alt="Avatar" style="width:50%"><br>
-			          <span>${value.name}</span>
-			          <div class="w3-row w3-opacity">
-			            <div class="check_remove" id="check_remove_${i}">
-							<div class="w3-half" id="check_${i}">
-							  <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
-							</div>
-							<div class="w3-half" id="remove_${i}">
-							  <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
-							</div>
-						</div>
-						<div class="cart_quantity_button" id="cart_quantity_button_${i}">
-							 <p class="p_helper">define trust weigh</p>	
-							 <a class="cart_quantity_up"> + </a>
-							 <input 
-							 	class="cart_quantity_input" 
-							 	type="text" 
-							 	name="quantity" 
-							 	value="1" 
-							 	autocomplete="off" 
-							 	size="2"
-							    id="cart_quantity_input_${i}"
-							 	>
-							 <a class="cart_quantity_down"> - </a>
-							 <div class="w3-half" id="validate_${i}">
-							  	<button class="w3-button w3-block w3-blue w3-section" style="margin:23px;" title="Decline"><i class="fa fa-plus"></i></button>
-							 </div>
-						</div>
-						
-						<div class="cart_quantity_button" id="validate_check_${i}">
-						 	<p><i class="fa fa-check"></i></p>							
-						</div>
-						
+			          <span>${value.job}</span><br>
+			          <span>${value.job}</span>
+			          <div class="w3-row w3-opacity" style="padding-top: 2.6em;">
+			            					
 			          </div>
 			        </div>
 			      </div>
@@ -184,35 +169,7 @@ background: #F0F0E9;
 				`;			
 				//console.log(value);
 			});
-			$(".m9").append(html);
-			$(".cart_quantity_button").hide();
-			$(".check_remove").show();
-			
-			$.each( suggestions, function( i, value ){
-				$("#remove_"+i).on("click", function(e){			
-					e.preventDefault();	
-					console.log("clicked" +i);
-					$("#friend_request_"+i).hide();
-				});
-				$("#check_"+i).on("click", function(e){			
-					e.preventDefault();	
-					$("#check_remove_"+i).hide();
-					$("#cart_quantity_button_"+i).show();
-				});
-				$("#validate_"+i).on("click", function(e){			
-					e.preventDefault();	
-					$.post( "/ajax/add/rt", 
-							{ trust_weight: $("#cart_quantity_input_"+i).val(), 
-							  name: value.name 
-							 })
-					  .done(function( data ) {
-						$("#check_remove_"+i).hide();
-						$("#cart_quantity_button_"+i).hide();
-						$("#validate_check_"+i).show();
-					 });
-					$("#cart_quantity_input_"+i).val();
-				});
-			});	
+			$(".m9").append(html);		
 		}
 		
 	});

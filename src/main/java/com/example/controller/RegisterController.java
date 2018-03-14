@@ -42,7 +42,7 @@ public class RegisterController {
 	public String regiter(@ModelAttribute("registrationForm") RegistrationForm form) {
 		System.out.println(form);
 		userRepository.save(form.createUser());
-		return "register/register";
+		return "redirect:/login";
 	}
 
 	@ModelAttribute("registrationForm")

@@ -42,6 +42,7 @@ public class Neo4jApplication {
 			User abdelkabir = new User("abdelkabir", "pass", "USER", "abdelkabir@gmail.com", "abdelkabir says hello world !!", new String[] {"movies", "swimming"}, "programmer");
 			User micheal = new User("micheal", "pass", "USER", "micheal@gmail.com", "micheal says hello world !!", new String[] {"reading", "travel"}, "taxi driver");
 			User hind = new User("hind", "pass", "USER", "hind@gmail.com", "hind says hello world !!", new String[] { "swimming"}, "photographer");
+			User sarah = new User("sarah", "pass", "USER", "sarah@gmail.com", "hind says hello world !!", new String[] { "dancing"}, "freelancer");
 			
 			User greg = new User("Greg");
 			greg.setPassword("pass");
@@ -59,6 +60,7 @@ public class Neo4jApplication {
 			personRepository.save(abdelkabir);
 			personRepository.save(micheal);
 			personRepository.save(hind);
+			personRepository.save(sarah);
 
 			abdelkabir = personRepository.findByName(abdelkabir.getName());
 			micheal = personRepository.findByName(micheal.getName());
