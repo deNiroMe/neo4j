@@ -12,6 +12,11 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+}
 .badge {
     display: inline-block;
     min-width: 10px;
@@ -81,6 +86,15 @@ background: #F0F0E9;
     <!--  img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar" -->
     Logout
   </a>
+  
+  <a href="/profile" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+    Add New
+  </a>
+  <a href="/profile2" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+    <!--  img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar" -->
+    View List
+  </a>
+  
  </div>
 </div>
 
@@ -141,7 +155,7 @@ background: #F0F0E9;
 	
 	$.get( "/friends", function( data ) {
 		suggestions = data;
-		alert(data);
+		
 		let html = '';
 		
 		if( suggestions.length == 0){
@@ -154,14 +168,20 @@ background: #F0F0E9;
 				   <div class="w3-col m2" id="friend_request_${i}">
 				   
 				   <div class="w3-card w3-round w3-white w3-center ">
-				   <span class="badge">5</span>
 			        <div class="w3-container">
 			          <p>${value.name}</p>
 			          <img src="img/avatar${avatar}.png" alt="Avatar" style="width:50%"><br>
 			          <span>${value.job}</span><br>
 			          <span>${value.job}</span>
-			          <div class="w3-row w3-opacity" style="padding-top: 2.6em;">
-			            					
+			          <div class="w3-row w3-opacity" style="padding-top: 0.6em;padding-bottom: 2.6em;">
+			          <span >trust_in :</span>  
+			          <span class="badge" style="background-color: #47af4e;"> 
+			          	<i class="fa fa-chevron-left"></i> ${value.weightIn} <i class="fa fa-chevron-right"></i>
+			          </span>
+			          <span >trust_out :</span> 
+			          <span class="badge" style="background-color: #d01f0d;"> 
+			          	<i class="fa fa-chevron-left"></i> ${value.weightOut } <i class="fa fa-chevron-right"></i>
+			          </span>  					
 			          </div>
 			        </div>
 			      </div>

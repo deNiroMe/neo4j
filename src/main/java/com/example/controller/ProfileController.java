@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.domain.TrustRelationship;
 import com.example.domain.User;
 import com.example.repository.UserRepository;
+import com.example.rest.model.UserRestModel;
 
 @Controller
 public class ProfileController {
@@ -63,13 +64,15 @@ public class ProfileController {
 	
 	@RequestMapping("/friends")
 	@ResponseBody
-	public List<User> trustRelationshipExists(Principal princibal) {
-		List<User> suggestions = new ArrayList<>();
+	public List<UserRestModel> trustRelationshipExists(Principal princibal) {
+		List<UserRestModel> suggestion = new ArrayList<>();
 		for(TrustRelationship t : userRepository
-									.getTrustRelationships(princibal.getName())) {
-			suggestions.add(t.getTrustee());
+									.getTrustRelationships(princibal.getName())) {			
+			int in = t.getWeight();
+			int out = userRepository.getTrusteeWeight(t.getTrustee().getName(),princibal.getName()) == null ? 0 : userRepository.getTrusteeWeight(t.getTrustee().getName(),princibal.getName());
+			suggestion.add(new UserRestModel(t.getTrustee(),in,out));
 		}
-		return suggestions;
+		return suggestion;
 	}
 	
 }
