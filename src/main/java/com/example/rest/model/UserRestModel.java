@@ -14,9 +14,9 @@ public class UserRestModel {
 	
 	private String email;
 	
-	private String description;
+	private String city;
 	
-	private String[] intrests;
+	private String gender;
 	
 	private String job;
 	
@@ -30,8 +30,8 @@ public class UserRestModel {
 		this.password = user.getPassword();
 		this.Role = user.getRole();
 		this.email = user.getEmail();
-		this.description = user.getDescription();
-		this.intrests = user.getIntrests();
+		this.city = user.getCity();
+		this.gender = user.getGender();
 		this.job = user.getJob();
 		this.weightIn = weightIn;
 		this.weightOut = weightOut;
@@ -77,20 +77,20 @@ public class UserRestModel {
 		this.email = email;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getCity() {
+		return city;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String[] getIntrests() {
-		return intrests;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setIntrests(String[] intrests) {
-		this.intrests = intrests;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getJob() {

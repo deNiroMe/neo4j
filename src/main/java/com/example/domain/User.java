@@ -21,9 +21,9 @@ public class User {
 	
 	private String email;
 	
-	private String description;
+	private String city;
 	
-	private String[] intrests;
+	private String gender;
 	
 	private String job;
 
@@ -56,15 +56,15 @@ public class User {
 	 * @param intrests
 	 * @param job
 	 */
-	public User(String name, String password, String role, String email, String description, String[] intrests,
+	public User(String name, String password, String role, String email, String city, String gender,
 			String job) {
 		super();
 		this.name = name;
 		this.password = password;
 		Role = role;
 		this.email = email;
-		this.description = description;
-		this.intrests = intrests;
+		this.city = city;
+		this.gender = gender;
 		this.job = job;
 	}
 
@@ -112,20 +112,20 @@ public class User {
 		this.email = email;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getCity() {
+		return city;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String[] getIntrests() {
-		return intrests;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setIntrests(String[] intrests) {
-		this.intrests = intrests;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getJob() {

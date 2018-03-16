@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>profile</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"  th:href="@{/css/profile.css}" type='text/css'>
+
+<body class="w3-theme-l5">
+
+<!-- Navbar -->
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="/logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+    <!--  img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar" -->
+    Logout
+  </a>  
+  <a href="/profile" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+    Add New
+  </a>
+  <a href="/profile2" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+    <!--  img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar" -->
+    View List
+  </a>
+  
+ </div>
+</div>
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+    <!-- Left Column -->
+    <div class="w3-col m3">
+      <!-- Profile -->
+      <div class="w3-card w3-round w3-white">
+        <div class="w3-container">
+         <h4 class="w3-center" th:text="${user.name}">My Profile</h4>
+         <p class="w3-center"><img id="profile_pic" src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+         <hr>
+         <p><i class="fa fa-address-card fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.email}">Designer, UI</span></p>
+         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.intrests}">Designer, UI</span></p>
+         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
+         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
+        </div>
+      </div>
+      <br>
+      
+      <!-- Accordion -->
+    <!-- End Left Column -->
+    </div>
+    
+    <!-- Middle Column -->
+	<div class="w3-col m9">
+
+	</div>
+	
+    <!-- End Grid -->
+  </div>
+  
+<!-- End Page Container -->
+</div>
+<br>
+
+<!-- Footer -->
+<footer class="w3-container w3-theme-d5">
+  <h5>Footer</h5>
+</footer>
+
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script> 
+
+<div layout:fragment="script_content">
+</div>
+
+</body>
+</html> 

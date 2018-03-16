@@ -1,7 +1,5 @@
 package com.example.forms;
 
-import java.util.Arrays;
-
 import com.example.domain.User;
 
 public class RegistrationForm {
@@ -12,9 +10,9 @@ public class RegistrationForm {
 	
 	private String password;
 	
-	private String description;
+	private String city;
 	
-	private String[] intrests;
+	private String gender;
 	
 	private String job;
 
@@ -42,20 +40,20 @@ public class RegistrationForm {
 		this.password = password;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getCity() {
+		return city;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String[] getIntrests() {
-		return intrests;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setIntrests(String[] intrests) {
-		this.intrests = intrests;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getJob() {
@@ -70,17 +68,17 @@ public class RegistrationForm {
 		User user = new User(this.name);
 		user.setPassword(this.password);
 		user.setRole("USER");
-		user.setDescription(this.description);
+		user.setCity(this.city);
 		user.setJob(this.job);
 		user.setEmail(this.email);
-		user.setIntrests(this.intrests);
+		user.setGender(this.gender);
 		return user;
 	}
 	
 	@Override
 	public String toString() {
-		return "RegistrationForm [name=" + name + ", email=" + email + ", password=" + password + ", description="
-				+ description + ", intrests=" + Arrays.toString(intrests) + ", job=" + job + "]";
+		return "RegistrationForm [name=" + name + ", email=" + email + ", password=" + password + ", city="
+				+ city + ", gender=" + gender + ", job=" + job + "]";
 	}
 	
 }

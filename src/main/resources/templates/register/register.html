@@ -64,8 +64,8 @@
 				<legend>
 					<span class="number">2</span>Your profile
 				</legend>
-				<label for="bio">Biography:</label>
-				<textarea id="bio" name="user_bio" th:field="*{description}" /></textarea>
+				<label for="bio">City:</label>
+				<input id="bio" type="text" name="user_bio" th:field="*{city}" /></textarea>
 			</fieldset>
 			<fieldset>
 				<label for="job">Job Role:</label> <select id="job" name="user_job"
@@ -97,12 +97,11 @@
 <!-- 					<label th:text="${search}"></label> -->
 <!-- 				</div> -->
 
-				<input type="checkbox" id="development" th:field="*{intrests}" value="interest_development"	name="user_interest"> 
-				<label class="light" for="development">Development</label><br> 
-					<input type="checkbox" id="design" value="interest_design" th:field="*{intrests}"name="user_interest"> 
-					<label class="light" for="design">Design</label><br>
-				<input type="checkbox" th:field="*{intrests}" id="business" value="interest_business" name="user_interest"> 
-				<label class="light" for="business">Business</label>
+				<label for="bio">Gender:</label>
+				<input  type="radio" id="development" th:field="*{gender}" value="interest_development"	name="user_interest"> 
+				<label class="light" for="development">Male</label><br> 
+					<input type="radio" id="design" value="interest_design" th:field="*{gender}"name="user_interest"> 
+					<label class="light" for="design">Female</label><br>
 
 			</fieldset>
 			<button type="submit">Sign Up</button>

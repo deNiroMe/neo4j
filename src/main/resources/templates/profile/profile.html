@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	layout:decorator="layouts/main">
 <head>
 <title>profile</title>
 <meta charset="UTF-8">
@@ -11,56 +9,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-footer {
-    position: fixed;
-    width: 100%;
-    bottom: 0px;
-}
-html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
-.m9 > .m2{
-	margin  : 7px;
-}
-h3.title{
-    font-size: xx-large;
-    font-stretch: normal;
-    margin: 50px;
-    color: #000;
-}
-
-.cart_quantity_up, .cart_quantity_down{
-background: #F0F0E9;
-    color: #696763;
-    display: inline-block;
-    font-size: 15px;
-    height: 28px;
-    overflow: hidden;
-    text-align: center;
-    width: 35px;
-    float: left;
-	
-	}
-
-.p_helper{
-    font-size: 14px;
-    margin-bottom: 0px;
-}
-	
-.cart_quantity_button{
-	margin-top:10px;
-	margin-bottom:10px;
-	padding-bottom: 30px;
-}
-	
-.cart_quantity_input {
-    color: #696763;
-    float: left;
-    font-size: 15px;
-    text-align: center;
-    font-family: 'Roboto',sans-serif;
-}
-
-</style>
+<link rel="stylesheet"  th:href="@{/css/profile.css}" type='text/css'>
 <body class="w3-theme-l5">
 
 <!-- Navbar -->
@@ -98,7 +47,7 @@ background: #F0F0E9;
          <hr>
          <p><i class="fa fa-address-card fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.email}">Designer, UI</span></p>
          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.intrests}">Designer, UI</span></p>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.city}">Designer, UI</span></p>
          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
          <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
          <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
@@ -136,8 +85,8 @@ background: #F0F0E9;
 
 	var suggestions = [];
 	
-	function getRandomInt() {
-		let min = 1, max = 6;
+	function getRandomInt(min,max) {
+		//let min = 1, max = 6;
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 	
@@ -152,7 +101,12 @@ background: #F0F0E9;
 		}
 		else {
 			$.each( suggestions, function( i, value ){		
-				avatar = getRandomInt();
+				
+				if( value.gender === 'M' )
+					avatar = getRandomInt(1,3);
+				else
+					avatar = getRandomInt(4,5);
+				
 				 html += ` 
 				   <div class="w3-col m2" id="friend_request_${i}">
 				   <div class="w3-card w3-round w3-white w3-center ">
@@ -232,7 +186,7 @@ background: #F0F0E9;
 	});
 	
 	
-	$("#profile_pic").attr("src","img/avatar" + getRandomInt() + ".png");
+	$("#profile_pic").attr("src","img/avatar" + getRandomInt(1,6) + ".png");
 
 // 	let html = '';
 // 	for (var i = 1; i < 7; i++) {

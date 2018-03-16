@@ -38,11 +38,11 @@ public class Neo4jApplication {
 
 			personRepository.deleteAll();
 
-			User ahmed = new User("ahmed", "pass", "USER", "ahmed@gmail.com", "ahmed says hello world !!", new String[] {"reading", "soccer"}, "programmer");
-			User abdelkabir = new User("abdelkabir", "pass", "USER", "abdelkabir@gmail.com", "abdelkabir says hello world !!", new String[] {"movies", "swimming"}, "programmer");
-			User micheal = new User("micheal", "pass", "USER", "micheal@gmail.com", "micheal says hello world !!", new String[] {"reading", "travel"}, "taxi driver");
-			User hind = new User("hind", "pass", "USER", "hind@gmail.com", "hind says hello world !!", new String[] { "swimming"}, "photographer");
-			User sarah = new User("sarah", "pass", "USER", "sarah@gmail.com", "hind says hello world !!", new String[] { "dancing"}, "freelancer");
+			User ahmed = new User("ahmed", "pass", "USER", "ahmed@gmail.com", "dakar", "M", "programmer");
+			User abdelkabir = new User("abdelkabir", "pass", "USER", "abdelkabir@gmail.com", "stockholm", "M", "programmer");
+			User micheal = new User("micheal", "pass", "USER", "micheal@gmail.com","wahran", "M", "taxi driver");
+			User hind = new User("hind", "pass", "USER", "hind@gmail.com","tunis", "F", "photographer");
+			User sarah = new User("sarah", "pass", "USER", "sarah@gmail.com", "NYC", "F", "freelancer");
 			
 			User greg = new User("Greg");
 			greg.setPassword("pass");
