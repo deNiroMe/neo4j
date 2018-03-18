@@ -7,10 +7,10 @@
 <title>profile</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" th:href="@{/css/w3.css}" type='text/css'>
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css" th:href="@{/css/w3-theme-blue-grey.css}" type='text/css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
 <link rel="stylesheet"  th:href="@{/css/profile.css}" type='text/css'>
 
 <body class="w3-theme-l5">
@@ -46,6 +46,7 @@
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
          <h4 class="w3-center" th:text="${user.name}">My Profile</h4>
+         <input type="hidden" th:value="${user.gender}" autocomplete="off" id="profile_photo" >         
          <p class="w3-center"><img id="profile_pic" src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
          <p><i class="fa fa-address-card fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.email}">Designer, UI</span></p>
@@ -138,7 +139,7 @@
 	});
 	
 	
-	$("#profile_pic").attr("src","img/avatar" + getRandomInt(1,6) + ".png");
+	$("#profile_pic").attr("src","img/avatar" + ($("#profile_photo").val() === 'M' ? getRandomInt(1,3) : getRandomInt(4,6)) + ".png");
 
 // 	let html = '';
 // 	for (var i = 1; i < 7; i++) {

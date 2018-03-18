@@ -3,6 +3,8 @@ package com.example.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,12 +68,22 @@ public class ProfileController {
 	@ResponseBody
 	public List<UserRestModel> trustRelationshipExists(Principal princibal) {
 		List<UserRestModel> suggestion = new ArrayList<>();
-		for(TrustRelationship t : userRepository
-									.getTrustRelationships(princibal.getName())) {			
+//		for(TrustRelationship t : userRepository
+//									.getTrustRelationships(princibal.getName())) {			
+//			int in = t.getWeight();
+//			int out = userRepository.getTrusteeWeight(t.getTrustee().getName(),princibal.getName()) == null ? 0 : userRepository.getTrusteeWeight(t.getTrustee().getName(),princibal.getName());
+//			suggestion.add(new UserRestModel(t.getTrustee(),in,out));
+//		}
+		//some java 8 magic XD
+		suggestion = userRepository
+		.getTrustRelationships(princibal.getName())
+		.stream().map( t -> {
 			int in = t.getWeight();
-			int out = userRepository.getTrusteeWeight(t.getTrustee().getName(),princibal.getName()) == null ? 0 : userRepository.getTrusteeWeight(t.getTrustee().getName(),princibal.getName());
-			suggestion.add(new UserRestModel(t.getTrustee(),in,out));
-		}
+			Optional<Integer> op = Optional.ofNullable(userRepository.getTrusteeWeight(t.getTrustee().getName(),princibal.getName()));
+			int out = op.isPresent() ? op.get().intValue() : 0;
+			return new UserRestModel(t.getTrustee(),in,out);
+		}).collect(Collectors.toList());
+		
 		return suggestion;
 	}
 	
