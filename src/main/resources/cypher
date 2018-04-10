@@ -1,0 +1,5 @@
+match (u:User) return u
+
+match (u:Product) return u
+
+match (u:User)-[r:Recommends]->(p:Product) return u,r,p

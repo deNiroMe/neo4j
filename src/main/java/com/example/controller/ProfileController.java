@@ -29,7 +29,7 @@ public class ProfileController {
 		this.userRepository  = userRepository;
 	}
 	
-	@RequestMapping("/profile")
+	@RequestMapping({"/profile","/"})
 	public String profilePage(Principal princibal,Model model) {
 		User user = userRepository.findByName(princibal.getName());
 		model.addAttribute("user", user);

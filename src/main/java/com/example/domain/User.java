@@ -35,11 +35,15 @@ public class User {
 	@Relationship(type = "Trusts", direction = Relationship.UNDIRECTED)
 	private Set<TrustRelationship> trustee = new HashSet<>();
 	
+	@Relationship(type = "Recommends", direction = Relationship.UNDIRECTED)
+	private Set<Recommendation> recommendations = new HashSet<>();	
+	
 	public void addTrustee(TrustRelationship person) {
-		if (trustee == null) {
-			trustee = new HashSet<>();
-		}
 		trustee.add(person);
+	}
+	
+	public void addRecommendation(Recommendation person) {
+		recommendations.add(person);
 	}
 	
 	public User(String name) {

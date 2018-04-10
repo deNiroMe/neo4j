@@ -1,23 +1,32 @@
 package com.example.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.domain.Product;
+import com.example.domain.Recommendation;
 import com.example.domain.User;
+import com.example.repository.ProductRepository;
 import com.example.repository.UserRepository;
 
 @Controller
 public class ProductsController {
 	
-private UserRepository userRepository;
+	private UserRepository userRepository;
+	
+	private ProductRepository productRepository;
 	
 	@Autowired
-	public ProductsController(UserRepository userRepository) {
+	public ProductsController(UserRepository userRepository,ProductRepository productRepository) {
 		this.userRepository  = userRepository;
+		this.productRepository = productRepository;
 	}
 
 	@RequestMapping("/products")
@@ -25,6 +34,37 @@ private UserRepository userRepository;
 		User user = userRepository.findByName(princibal.getName());
 		model.addAttribute("user", user);
 		return "products/product-list";
+	}
+	
+	@RequestMapping("/ajax/products")
+	@ResponseBody
+	public List<Product> products(Principal princibal,Model model) {		
+		return (List<Product>) productRepository.findAll();
+	}
+	
+	@RequestMapping("/ajax/recommendation")
+	@ResponseBody
+	public List<Recommendation> recommendation(Principal princibal,@RequestParam String name) {		
+		return  productRepository.getUserRecommendations(name);
+	}
+	
+	@RequestMapping("/ajax/add-recommendation")
+	@ResponseBody
+	public String createRecommendation(Principal princibal,@RequestParam String product,int starts) {
+		
+		Product p = productRepository.findByName(product);
+		User user = userRepository.findByName(princibal.getName());
+		Recommendation r1 = new Recommendation(p, user,(short) starts);
+		user.addRecommendation(r1);
+		userRepository.save(user);
+		
+		return  "ok";
+	}
+	
+	@RequestMapping("/ajax/peopleWhoAlsoLiked")
+	@ResponseBody
+	public List<Recommendation> peopleWhoAlsoLiked(Principal princibal,@RequestParam String product) {		
+		return  productRepository.peopleWhoAlsoLiked(product);
 	}
 	
 }
