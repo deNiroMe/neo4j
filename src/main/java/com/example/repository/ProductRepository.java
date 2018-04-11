@@ -16,5 +16,8 @@ public interface ProductRepository extends CrudRepository<Product,Long> {
 	 @Query("MATCH (u:User)-[t:Recommends]->(y:Product {name: {0}}) return t,u,y")
 	 List<Recommendation> peopleWhoAlsoLiked(String name);    	
 	 
+	 @Query("MATCH (u:User {name: {0}})-[t:Recommends]->(y:Product {name: {1}}) return t,u,y")
+	 Recommendation recommendationByUserAndProduct(String name,String product);    	
+	 
 	 Product findByName(String name) ;
 }

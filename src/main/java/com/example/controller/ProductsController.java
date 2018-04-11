@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,15 +51,24 @@ public class ProductsController {
 	
 	@RequestMapping("/ajax/add-recommendation")
 	@ResponseBody
-	public String createRecommendation(Principal princibal,@RequestParam String product,int starts) {
+	public List<Recommendation> createRecommendation(Principal princibal,@RequestParam String product,@RequestParam int starts) {
 		
 		Product p = productRepository.findByName(product);
 		User user = userRepository.findByName(princibal.getName());
-		Recommendation r1 = new Recommendation(p, user,(short) starts);
-		user.addRecommendation(r1);
-		userRepository.save(user);
 		
-		return  "ok";
+		List<Recommendation> list = productRepository.getUserRecommendations(user.getName());
+		boolean exists = false;
+		for(Recommendation r : list) {
+			if(r.getProduct().getName().equals(product))
+				exists = true;
+		}
+		if(!exists) {
+			Recommendation r1 = new Recommendation(p, user,(short) starts);
+			user.addRecommendation(r1);
+			userRepository.save(user);
+		}
+		
+		return  productRepository.peopleWhoAlsoLiked(product);
 	}
 	
 	@RequestMapping("/ajax/peopleWhoAlsoLiked")

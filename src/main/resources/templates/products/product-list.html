@@ -101,45 +101,8 @@ img {width:100%}
 			<h4 style="text-align: center;">People who also recommend this product </h4>
 		</div>
 		<div class="row" id="users">
-	        <div class="col-md-4">
-	            <div class="testimonials">
-	            	<div class="active item">
-	                   <div class="carousel-info pull-left">
-	                    <img alt="" src="http://keenthemes.com/assets/bootsnipp/img1-small.jpg" class="pull-left">
-	                    <div class="pull-left">
-	                      <span class="testimonials-name">Lina Mars</span>
-	                      <span class="testimonials-post">Commercial Director</span>
-	                    </div>
-	                  </div>
-	                </div>
-	            </div>
-	        </div>
-	        <div class="col-md-4">
-	            <div class="testimonials">
-	            	<div class="active item">
-	                   <div class="carousel-info pull-left">
-	                    <img alt="" src="http://keenthemes.com/assets/bootsnipp/img1-small.jpg" class="pull-left">
-	                    <div class="pull-left">
-	                      <span class="testimonials-name" style="text-align: center;">Lina Mars</span>
-	                      <span class="testimonials-post">Commercial Director</span>
-	                    </div>
-	                  </div>
-	                </div>
-	            </div>
-	        </div>
-	        <div class="col-md-4">
-	            <div class="testimonials">
-	            	<div class="active item">
-	                   <div class="carousel-info pull-left">
-	                    <img alt="" src="http://keenthemes.com/assets/bootsnipp/img1-small.jpg" class="pull-left">
-	                    <div class="pull-left">
-	                      <span class="testimonials-name">Lina Mars</span>
-	                      <span class="testimonials-post">Commercial Director</span>
-	                    </div>
-	                  </div>
-	                </div>
-	            </div>
-	        </div>
+	        
+	       
    		</div>
 		
 	</div>
@@ -215,6 +178,9 @@ img {width:100%}
 	
 	$.get( "/ajax/products", function( data ) {
 		products = data;
+		function getRandomInt(min,max) {
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
 	var html = '';
 	$.each( products, function( i, value ){		
 		
@@ -272,13 +238,37 @@ img {width:100%}
 						else
 							$("#starts_"+j+"_"+value.photo).removeClass("checked");
 					}
+					$.get( "/ajax/add-recommendation?product="+value.name+"&starts="+i, function( data ) {
+						var html = '';
+						$.each( data, function( i, value ){								
+							if( value.user.gender === 'M' )
+								avatar = getRandomInt(1,3);
+							else
+								avatar = getRandomInt(4,5);							
+							 html += `
+								 <div class="col-md-4">
+						            <div class="testimonials">
+						            	<div class="active item">
+						                   <div class="carousel-info pull-left">
+						                    <img alt="" src="img/avatar${avatar}.png" class="pull-left">
+						                    <div class="pull-left">
+						                      <span class="testimonials-name" style="text-align:center;">${value.user.name}</span><br>
+						                      <span class="testimonials-post" style="text-align:center;">${value.user.job}</span>
+						                    </div>
+						                  </div>
+						                </div>
+						            </div>
+						        </div>
+							 `;
+						});
+						$("#users").empty();
+						$("#users").append(html);
+					});
 				});
-			}
+			}			
 		});
 	
 	});
-
-	
 	
 })();
 </script>
