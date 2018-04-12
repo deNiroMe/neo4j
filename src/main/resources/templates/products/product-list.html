@@ -13,7 +13,7 @@
 <link rel="stylesheet"  th:href="@{/css/profile.css}" type='text/css'>
 <style type="text/css">
 .bg-gray {color:#696969;}
-.shadow1 {  background-color: #fff;  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+.shadow1 {  background-color: #fff;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
 margin-bottom:15px;}
 img {width:100%}
 .car-details li {
@@ -83,6 +83,11 @@ img {width:100%}
     Products
   </a>
   
+  <a href="/my-recommendations" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" >
+    <!--  img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar" -->
+    My Recommendations
+  </a>
+  
  </div>
 </div>
 
@@ -97,11 +102,11 @@ img {width:100%}
 	</div>
 	
 	<div class="w3-col m4" id="list_users">
-		<div class="row">
-			<h4 style="text-align: center;">People who also recommend this product </h4>
-		</div>
-		<div class="row" id="users">
-	        
+		
+		<div class="row" id="users" style="position : fixed;">
+	       
+				
+			
 	       
    		</div>
 		
@@ -239,23 +244,37 @@ img {width:100%}
 							$("#starts_"+j+"_"+value.photo).removeClass("checked");
 					}
 					$.get( "/ajax/add-recommendation?product="+value.name+"&starts="+i, function( data ) {
-						var html = '';
+						var html = '<h4 style="text-align: center;">People who also recommend this product </h4>';
 						$.each( data, function( i, value ){								
 							if( value.user.gender === 'M' )
 								avatar = getRandomInt(1,3);
 							else
-								avatar = getRandomInt(4,5);							
+								avatar = getRandomInt(4,5);	
+							var stars = '';
+							for(let j = 1; j <= 5; j++){
+								if(j<=value.stars)
+									stars += '<span  class="fa fa-star checked"></span>';
+								else
+									stars += '<span  class="fa fa-star"></span>';
+							}
+							
 							 html += `
 								 <div class="col-md-4">
 						            <div class="testimonials">
 						            	<div class="active item">
 						                   <div class="carousel-info pull-left">
-						                    <img alt="" src="img/avatar${avatar}.png" class="pull-left">
-						                    <div class="pull-left">
+						                    <div class="row">
+						                   	 <img alt="" src="img/avatar${avatar}.png" class="pull-left">
+						                    </div>
+						                    <div class="row">
 						                      <span class="testimonials-name" style="text-align:center;">${value.user.name}</span><br>
 						                      <span class="testimonials-post" style="text-align:center;">${value.user.job}</span>
 						                    </div>
+						                    <div class="row">
+							                    ${stars}
+						                      </div>
 						                  </div>
+						                  
 						                </div>
 						            </div>
 						        </div>

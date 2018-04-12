@@ -3,3 +3,11 @@ match (u:User) return u
 match (u:Product) return u
 
 match (u:User)-[r:Recommends]->(p:Product) return u,r,p
+
+
+#notes 
+select A.ID, A.Total, b.SB as AmountB, c.SC as AmountC, d.SD as AmountD
+from A
+  inner join (select ExtID, sum(Amount) as SB from B group by ExtID) b on A.ID = b.ExtID
+  inner join (select ExtID, sum(Amount) as SC from C group by ExtID) c on c.ExtID = A.ID
+  inner join (select ExtID, sum(Amount) as SD from D group by ExtID) d on d.ExtID = A.ID

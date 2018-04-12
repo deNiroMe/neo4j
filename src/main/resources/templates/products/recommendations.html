@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"
+	layout:decorator="layouts/main">
+<head>
+<title>profile</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" th:href="@{/css/w3.css}" type='text/css'>
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css" th:href="@{/css/w3-theme-blue-grey.css}" type='text/css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+<link rel="stylesheet"  th:href="@{/css/bootstrap.min.css}" type='text/css'>
+<link rel="stylesheet"  th:href="@{/css/profile.css}" type='text/css'>
+<style type="text/css">
+.bg-gray {color:#696969;}
+.shadow1 {  background-color: #fff;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+margin-bottom:15px;}
+img {width:100%}
+.car-details li {
+    border-right: 1px solid #eeeeee;
+    margin: 0 !important;
+    padding: 0 10px;
+    font-size:18px;
+}
+.car-details li small {
+    display: block;
+    line-height: 1;
+    font-size: 14px;
+}
+.car-details li {
+    font-size: 16px;
+}
+.car-details li .fa {
+    color: #5783b0;
+    float: left;
+    font-size: 18px;
+    margin: 10px 10px 20px 0;
+}
+.checked {
+    color: orange;
+}
+
+.testimonials .carousel-info img {
+    border: 1px solid #f5f5f5;
+    border-radius: 150px !important;
+    height: 75px;
+    padding: 3px;
+    width: 75px;
+}
+
+.testimonials span.testimonials-name {
+    color: #e6400c;
+    font-size: 16px;
+    font-weight: 300;
+    margin: 23px 0 7px;
+}
+.testimonials span.testimonials-post {
+    color: #656565;
+    font-size: 12px;
+}
+</style>
+
+<body class="w3-theme-l5">
+
+<!-- Navbar -->
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+  
+  <a href="/logout" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" >
+    <!--  img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar" -->
+    Logout
+  </a>
+  
+  <a href="/profile" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" >
+    Add New
+  </a>
+  <a href="/profile2" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" >
+    <!--  img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar" -->
+    View List
+  </a>
+  <a href="/products" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" >
+    <!--  img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar" -->
+    Products
+  </a>
+  <a href="/my-recommendations" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" >
+    <!--  img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar" -->
+    My Recommendations
+  </a>
+  
+ </div>
+</div>
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+    
+    <div class="w3-col m3" id="list_users">
+			
+	</div>
+    
+    <!-- Middle Column -->
+	<div class="w3-col m8" id="list_products">
+		
+	</div>
+	
+    <!-- End Grid -->
+  </div>
+  
+<!-- End Page Container -->
+</div>
+<br>
+
+<!-- Footer -->
+<footer class="w3-container w3-theme-d5">
+  <h5>Footer</h5>
+</footer>
+
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script> 
+<script>
+
+(function () {
+	
+	var products = [];
+	
+	$.get( "/ajax/recommendation", function( data ) {
+		products = data;
+			var html = '';
+			$.each( products, function( i, value ){		
+				var stars = '';
+				for(let j = 1; j <= 5; j++){
+					if(j<=value.stars)
+						stars += '<i style="margin-top: 4px;" class="fa fa-star checked"></i>';
+					else
+						stars += '<i style="margin-top: 4px;" class="fa fa-star"></i>';
+				}
+				 html += ` 	   
+					 <div class="container bg-gray ">
+						<div class="row">
+						   <div class="col-md-9 col-md-offset-2 shadow1">
+					            <div class="col-md-3">
+					                <div class="list-car-img">
+					                    <img class="img-responsive" style="width:60%" src="img/${value.product.photo}.png" >
+					                </div>
+					            </div>
+					            <div class="col-md-8">
+					                <div class="list-car-title clearfix">
+					                    <h4>${value.product.name}</h4>
+					                    <hr>
+					                </div>
+					                <div class="car-details" style="padding-bottom: 0px;margin-top: -19px;">
+					                  <ul class="list-inline" >
+					                    <li><i class="fa fa-list" style="margin-top: 4px;"></i>Category<span> : ${value.product.category}</span></li>
+					                    <li><i class="fa fa-money" style="margin-top: 4px;"></i>Price <span> : ${value.product.price}</span></li>
+					                    
+					                  </ul> 				    
+					            </div>
+					            
+					            <div class="car-bottom" style="margin-top: -10px;">
+			                    <ul class="list-inline pull-right">
+			                        <li><a href="#">rating : </a></li>
+			                        <li>${stars}</li>
+			                    </ul>
+			                </div>
+					            
+					            </div>
+					        </div>
+					    </div>
+					</div>				 
+				`;		 
+			});
+		$("#list_products").append(html);		
+	
+	});
+	
+})();
+</script>
+
+</body>
+</html> 
