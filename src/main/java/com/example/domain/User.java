@@ -26,6 +26,8 @@ public class User {
 	private String gender;
 	
 	private String job;
+	
+	private String photo;
 
 	@SuppressWarnings("unused")
 	private User() {
@@ -70,6 +72,20 @@ public class User {
 		this.city = city;
 		this.gender = gender;
 		this.job = job;
+	}
+	
+	
+
+	public User(String name, String password, String role, String email, String city, String gender, String job,
+			String photo) {
+		this.name = name;
+		this.password = password;
+		Role = role;
+		this.email = email;
+		this.city = city;
+		this.gender = gender;
+		this.job = job;
+		this.photo = photo;
 	}
 
 	public String getName() {
@@ -138,6 +154,14 @@ public class User {
 
 	public void setJob(String job) {
 		this.job = job;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 }

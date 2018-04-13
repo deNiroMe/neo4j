@@ -68,13 +68,6 @@ public class ProfileController {
 	@ResponseBody
 	public List<UserRestModel> trustRelationshipExists(Principal princibal) {
 		List<UserRestModel> suggestion = new ArrayList<>();
-//		for(TrustRelationship t : userRepository
-//									.getTrustRelationships(princibal.getName())) {			
-//			int in = t.getWeight();
-//			int out = userRepository.getTrusteeWeight(t.getTrustee().getName(),princibal.getName()) == null ? 0 : userRepository.getTrusteeWeight(t.getTrustee().getName(),princibal.getName());
-//			suggestion.add(new UserRestModel(t.getTrustee(),in,out));
-//		}
-		//some java 8 magic XD
 		suggestion = userRepository
 		.getTrustRelationships(princibal.getName())
 		.stream().map( t -> {

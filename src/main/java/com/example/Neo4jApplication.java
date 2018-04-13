@@ -42,13 +42,13 @@ public class Neo4jApplication {
 			personRepository.deleteAll();
 			productRepository.deleteAll();
 
-			User ahmed = new User("ahmed", "pass", "USER", "ahmed@gmail.com", "dakar", "M", "programmer");
-			User abdelkabir = new User("abdelkabir", "pass", "USER", "abdelkabir@gmail.com", "stockholm", "M", "programmer");
-			User micheal = new User("micheal", "pass", "USER", "micheal@gmail.com","wahran", "M", "taxi driver");
-			User hind = new User("hind", "pass", "USER", "hind@gmail.com","tunis", "F", "photographer");
-			User sarah = new User("sarah", "pass", "USER", "sarah@gmail.com", "NYC", "F", "freelancer");
-			User omar = new User("omar", "pass", "USER", "omar@gmail.com","tokyo", "M", "commercial supervisor");
-			User abdeljalil = new User("abd eljalil", "pass", "USER", "abdeljalilh@gmail.com", "ben grir", "M", "i'm rich i don't work");
+			User ahmed = new User("ahmed", "pass", "USER", "ahmed@gmail.com", "dakar", "M", "programmer","img/avatar1.png");
+			User abdelkabir = new User("abdelkabir", "pass", "USER", "abdelkabir@gmail.com", "stockholm", "M", "programmer","img/avatar2.png");
+			User micheal = new User("micheal", "pass", "USER", "micheal@gmail.com","wahran", "M", "taxi driver","img/avatar4.png");
+			User hind = new User("hind", "pass", "USER", "hind@gmail.com","tunis", "F", "photographer","img/avatar5.png");
+			User sarah = new User("sarah", "pass", "USER", "sarah@gmail.com", "NYC", "F", "freelancer","img/avatar6.png");
+			User omar = new User("omar", "pass", "USER", "omar@gmail.com","tokyo", "M", "commercial supervisor","img/avatar3.png");
+			User abdeljalil = new User("abd eljalil", "pass", "USER", "abdeljalilh@gmail.com", "ben grir", "M", "i'm rich i don't work","img/avatar10.png");
 			
 			List<User> team = Arrays.asList(ahmed,hind,abdelkabir,micheal);
 

@@ -50,7 +50,7 @@
         <div class="w3-container">
          <h4 class="w3-center" th:text="${user.name}">My Profile</h4>
          <input type="hidden" th:value="${user.gender}" autocomplete="off" id="profile_photo" >         
-         <p class="w3-center"><img id="profile_pic" src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+         <p class="w3-center"><img  th:src="${user.photo}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
          <p><i class="fa fa-address-card fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.email}">Designer, UI</span></p>
          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <span th:text="${user.job}">Designer, UI</span></p>
@@ -117,7 +117,7 @@
 				   <div class="w3-card w3-round w3-white w3-center ">
 			        <div class="w3-container">
 			          <p>${value.name}</p>
-			          <img src="img/avatar${avatar}.png" alt="Avatar" style="width:50%"><br>
+			          <img src="${value.photo}" alt="Avatar" style="width:50%"><br>
 			          <span>${value.email}</span><br>
 			          <span>${value.job}</span>
 			          <div class="w3-row w3-opacity" style="padding-top: 0.6em;padding-bottom: 2.6em;">

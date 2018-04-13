@@ -4,6 +4,10 @@ match (u:Product) return u
 
 match (u:User)-[r:Recommends]->(p:Product) return u,r,p
 
+match (u:User)-[t:Trusts]->() return u, t
+
+match (u:User {name:'sarah'})-[:Recommends]->(p:Product)<-[:Recommends]-(people) return u,p,people
+
 
 #notes 
 select A.ID, A.Total, b.SB as AmountB, c.SC as AmountC, d.SD as AmountD

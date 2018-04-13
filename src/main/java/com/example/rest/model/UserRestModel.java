@@ -20,6 +20,8 @@ public class UserRestModel {
 	
 	private String job;
 	
+	private String photo;
+	
 	private int weightIn;
 	
 	private int weightOut;
@@ -33,6 +35,7 @@ public class UserRestModel {
 		this.city = user.getCity();
 		this.gender = user.getGender();
 		this.job = user.getJob();
+		this.photo = user.getPhoto();
 		this.weightIn = weightIn;
 		this.weightOut = weightOut;
 	}
@@ -115,6 +118,14 @@ public class UserRestModel {
 
 	public void setWeightOut(int weightOut) {
 		this.weightOut = weightOut;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 }
