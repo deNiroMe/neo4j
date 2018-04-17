@@ -48,7 +48,7 @@ public class Neo4jApplication {
 			User hind = new User("hind", "pass", "USER", "hind@gmail.com","tunis", "F", "photographer","img/avatar5.png");
 			User sarah = new User("sarah", "pass", "USER", "sarah@gmail.com", "NYC", "F", "freelancer","img/avatar6.png");
 			User omar = new User("omar", "pass", "USER", "omar@gmail.com","tokyo", "M", "commercial supervisor","img/avatar3.png");
-			User abdeljalil = new User("abd eljalil", "pass", "USER", "abdeljalilh@gmail.com", "ben grir", "M", "i'm rich i don't work","img/avatar10.png");
+			User abdeljalil = new User("abd eljalil", "pass", "USER", "abdeljalilh@gmail.com", "ben grir", "M", "i'm rich i don't work","img/avatar7.png");
 			
 			List<User> team = Arrays.asList(ahmed,hind,abdelkabir,micheal);
 

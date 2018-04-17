@@ -1,5 +1,7 @@
 package com.example.forms;
 
+import java.util.Random;
+
 import com.example.domain.User;
 
 public class RegistrationForm {
@@ -72,6 +74,12 @@ public class RegistrationForm {
 		user.setJob(this.job);
 		user.setEmail(this.email);
 		user.setGender(this.gender);
+		
+			
+		int n =	user.getGender().equals("M") ? getRandomNumberInRange(21, 27) : getRandomNumberInRange(13, 19);
+		
+		user.setPhoto("img/avatar"+n+".png");
+		
 		return user;
 	}
 	
@@ -79,6 +87,17 @@ public class RegistrationForm {
 	public String toString() {
 		return "RegistrationForm [name=" + name + ", email=" + email + ", password=" + password + ", city="
 				+ city + ", gender=" + gender + ", job=" + job + "]";
+	}
+	
+	
+	private int getRandomNumberInRange(int min, int max) {
+
+		if (min >= max) {
+			throw new IllegalArgumentException("max must be greater than min");
+		}
+
+		Random r = new Random();
+		return r.nextInt((max - min) + 1) + min;
 	}
 	
 }
