@@ -6,26 +6,28 @@
 </head>
 <body>
 
+<!--
 I have a div that i set with direction rtl cause i'm displayin arabe content,
 wich works fine except for negative numbers as it diplays the - sign at the end of 
 the number, somthing like this 7117,00-, even that i'm overriten the property direction
 to ltf,
 
 here is a snippet of my code
-
+-->
 	<div class="main" style="direction: rtl;">
 		<p class="p-info">
 		    <span style="float:right;width: 80px;"> 
 		    	الباقي
 		    </span>  
-		   <span class="reste" style="margin-right: 62px;direction: ltr;">
-			    -7117,00
+		   <span class="reste" style="margin-right: 62px;direction: ltr;unicode-bidi: bidi-override;">
+			    -7113,00DH
 		   </span>
 		</p>
 	</div>
 	
+	<!--
 which displays 
-
+-->
 
 
 </body>
