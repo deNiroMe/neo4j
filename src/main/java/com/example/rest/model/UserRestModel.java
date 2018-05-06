@@ -25,6 +25,8 @@ public class UserRestModel {
 	private int weightIn;
 	
 	private int weightOut;
+	
+	private boolean up;
 
 	public UserRestModel(User user, int weightIn, int weightOut) {
 		super();
@@ -38,6 +40,21 @@ public class UserRestModel {
 		this.photo = user.getPhoto();
 		this.weightIn = weightIn;
 		this.weightOut = weightOut;
+	}
+	
+	public UserRestModel(User user, int weightIn, int weightOut,boolean up) {
+		super();
+		this.name = user.getName();
+		this.password = user.getPassword();
+		this.Role = user.getRole();
+		this.email = user.getEmail();
+		this.city = user.getCity();
+		this.gender = user.getGender();
+		this.job = user.getJob();
+		this.photo = user.getPhoto();
+		this.weightIn = weightIn;
+		this.weightOut = weightOut;
+		this.up = up;
 	}
 
 	public Long getId() {
@@ -127,5 +144,20 @@ public class UserRestModel {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+	
+	/**
+	 * @return the up
+	 */
+	public boolean isUp() {
+		return up;
+	}
+
+	/**
+	 * @param up the up to set
+	 */
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+
 	
 }

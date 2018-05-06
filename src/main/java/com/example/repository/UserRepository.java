@@ -16,7 +16,10 @@ public interface UserRepository extends CrudRepository<User, Long> {
     List<User> findUserFriends(String name);
     
     @Query("MATCH (u:User {name: {0}})-[t:Trusts]->(y:User) return t,u,y")
-    List<TrustRelationship> getTrustRelationships(String name); 
+    List<TrustRelationship> getTrustRelationships(String name);
+    
+    @Query("MATCH (u:User)-[t:Trusts]->(y:User) return t,u,y")
+    List<TrustRelationship> getAllTrustRelationships();
     
     @Query("MATCH (u:User {name: {0}})-[t:Trusts]->(y:User {name: {1}}) return t,u,y")
     TrustRelationship getTrustee(String name,String trustee); 

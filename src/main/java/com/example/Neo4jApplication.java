@@ -81,9 +81,20 @@ public class Neo4jApplication {
 			
 			TrustRelationship trustee3 = new TrustRelationship(5,hind,micheal);
 			TrustRelationship trustee4 = new TrustRelationship(5,hind,ahmed);
+			TrustRelationship trustee5 = new TrustRelationship(7,hind,sarah);
 			hind.addTrustee(trustee4);
 			hind.addTrustee(trustee3);
+			hind.addTrustee(trustee5);
 			personRepository.save(hind);
+			
+			TrustRelationship trustee6 = new TrustRelationship(5,ahmed,abdeljalil);
+			ahmed.addTrustee(trustee6);
+			TrustRelationship trustee7 = new TrustRelationship(5,ahmed,abdelkabir);
+			ahmed.addTrustee(trustee7);
+			
+			TrustRelationship trustee8 = new TrustRelationship(15,ahmed,omar);
+			ahmed.addTrustee(trustee8);
+			personRepository.save(ahmed);
 			
 
 			log.info("Lookup each person by name...");
@@ -112,7 +123,7 @@ public class Neo4jApplication {
 			ahmed.addRecommendation(r1);
 			personRepository.save(ahmed);
 			
-			Recommendation r2 = new Recommendation(boat, micheal, (short) 2);
+			Recommendation r2 = new Recommendation(car, micheal, (short) 2);
 			micheal.addRecommendation(r2);
 			personRepository.save(micheal);			
 			
@@ -123,6 +134,16 @@ public class Neo4jApplication {
 			Recommendation r4 = new Recommendation(phone, abdelkabir, (short) 2);
 			abdelkabir.addRecommendation(r4);
 			personRepository.save(abdelkabir);
+			
+			Recommendation r5 = new Recommendation(car, abdelkabir, (short) 3);
+			abdelkabir.addRecommendation(r5);
+			personRepository.save(abdelkabir);
+			
+			Recommendation r6 = new Recommendation(car, abdeljalil, (short) 6);
+			abdeljalil.addRecommendation(r6);
+			personRepository.save(abdeljalil);
+			
+			
 			
 		};
 	}
