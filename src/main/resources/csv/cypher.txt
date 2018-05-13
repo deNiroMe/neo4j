@@ -1,0 +1,67 @@
+bin/neo4j-admin import --nodes import/movie-ratings.csv --nodes import/review-ratings.csv --relationships import/trusts.csv
+
+LOAD CSV WITH HEADERS FROM "file:///movie-ratings.csv
+" AS line WITH line
+RETURN line
+;
+
+
+// Create movies
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///movie-ratings.csv" AS line WITH line" AS row
+CREATE (:Movie {userID: row.userID, movieID: row.movieID, genreID: row.genreID, reviewID: row.reviewID, movieRating: row.movieRating, date: row.date});
+
+// Create movies
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///movie-ratings.csv" AS row
+CREATE (:Movie {movieID: row.movieID});
+
+// Create movies
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///movie-ratings.csv" AS row
+CREATE (:User {userID: row.userID});
+
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///trusts.csv" AS row
+MATCH (movie:Movie {movieID: row.movieID})
+MATCH (user:User {userID: row.userID})
+MERGE (user)-[t:Trusts]->(movie)
+ON CREATE SET t.trustValue = row.trustValue;
+
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///users.csv" AS row
+CREATE (:User {userID: row.userID});
+
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///trusts.csv" AS row
+MATCH (u:User {userID: row.trustorID})
+MATCH (y:User {userID: row.trusteeID})
+MERGE (u)-[t:Trusts]->(y)
+ON CREATE SET t.trustValue = row.trustValue;
+
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///users_movies.csv" AS row
+MATCH (u:User {userID: row.userID})
+MATCH (y:Movie {movieID: row.movieID})
+MERGE (u)-[t:Watched]->(y);
+
+
+// Create reviews
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///review-ratings.csv" AS row
+CREATE (:Review {userID: row.userID,reviewID: row.reviewID, reviewRating: row.reviewRating});
+
+
+// Create trusts
+//USING PERIODIC COMMIT
+//LOAD CSV WITH HEADERS FROM "file:///movie-ratings.csv" AS line WITH line" AS row
+//CREATE (:Movie {trustorID: row.trustorID, trusteeID: row.trusteeID, trustValue: row.trustValue});
+//trustorID,trusteeID,trustValue
+
+// delete all nodes
+MATCH (n)
+OPTIONAL MATCH (n)-[r]-()
+DELETE n,r
+
+\\ installation PATH 
+C:\Users\LENOVO\AppData\Roaming\Neo4j Desktop\Application\neo4jDatabases\database-515b10f8-68b1-42ed-a775-3818f945e624\installation-3.3.

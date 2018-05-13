@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
+import com.example.domain.CsvReader;
 import com.example.domain.Product;
 import com.example.domain.Recommendation;
 import com.example.domain.TrustRelationship;
@@ -143,7 +144,7 @@ public class Neo4jApplication {
 			abdeljalil.addRecommendation(r6);
 			personRepository.save(abdeljalil);
 			
-			
+			CsvReader.appendToCsvFile();
 			
 		};
 	}
