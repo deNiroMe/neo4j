@@ -33,6 +33,11 @@ LOAD CSV WITH HEADERS FROM "file:///users.csv" AS row
 CREATE (:User {userID: row.userID});
 
 USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///movies.csv" AS row
+CREATE (:Movie {movieID: row.movieID});
+
+
+USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "file:///trusts.csv" AS row
 MATCH (u:User {userID: row.trustorID})
 MATCH (y:User {userID: row.trusteeID})
